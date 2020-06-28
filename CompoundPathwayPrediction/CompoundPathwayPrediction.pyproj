@@ -22,11 +22,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CompoundPathwayPrediction.py" />
+    <Compile Include="CompoundComposition.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PrepareData.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="compound.txt" />
-    <Content Include="compound_pathway.txt" />
-    <Content Include="pathway.txt" />
+    <Content Include="data\compound.txt" />
+    <Content Include="data\compound_formula.txt" />
+    <Content Include="data\compound_pathway.txt" />
+    <Content Include="data\pathway.txt" />
+    <Content Include="data\pathway_classes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="data\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
