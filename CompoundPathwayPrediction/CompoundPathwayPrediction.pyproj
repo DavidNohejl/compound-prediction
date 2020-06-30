@@ -25,6 +25,15 @@
     <Compile Include="CompoundComposition.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Evaluation.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExploratoryAnalysis.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Plots.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PrepareData.py">
       <SubType>Code</SubType>
     </Compile>

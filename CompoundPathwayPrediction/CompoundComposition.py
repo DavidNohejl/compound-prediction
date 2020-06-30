@@ -22,13 +22,14 @@ def compoundToComposition(compound, table):
     # https://stackoverflow.com/questions/2974362/parsing-a-chemical-formula
     element_pat = re.compile("([A-Z][a-z]?)(\d*)")
       
-    h = c = n = o =p =s = chl = 0
+    h = c = n = o =p =s = chl = 0.0
     for (element_name, count) in element_pat.findall(compound):
 
         table.setdefault(element_name, 0)
         table[element_name] = table[element_name]+1
         if count == "":
             count = 1
+        count = int(count)
         if element_name == 'H':
             h = count
         if element_name == 'C':

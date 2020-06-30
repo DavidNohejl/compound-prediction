@@ -98,15 +98,13 @@ relevant_formulas = {k:v for (k,v) in formulas.items() if k in mapping.keys() }
 
 def map_compound_to_pathway_classes(mapping, classes):
     result = dict()
-    lb = preprocessing.LabelBinarizer()
-    lb.fit(list(metabolism_classes.values()))
     for k,v in mapping.items():
         pathway_classes = set([classes[c] for c in v if c in classes.keys()])
         if len(pathway_classes) > 0:
-            result[k] = sum(lb.transform(list(pathway_classes)))
+            result[k] = list(pathway_classes)
     return result
 
-encoded_dict = map_compound_to_pathway_classes(mapping, classes)
+encoded_dict = map_compound_to_pathway_classes(mapping, metabolism_classes)
 
 relevant_formulas = {k:v for (k,v) in relevant_formulas.items() if k in encoded_dict.keys() }
 composition_list = [compoundToComposition(c,table) for c in relevant_formulas.values()]
