@@ -1,5 +1,4 @@
 from PrepareData import *
-
 from sklearn import tree
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import MultiLabelBinarizer
@@ -56,5 +55,26 @@ print (clf.best_params_, clf.best_score_)
 classifier = MLkNN(k=1,s=0.5)
 
 prediction = classifier.fit(x_train, Y).predict(x_test)
+
+evaluate_classifier(classifier,x_test,Y_test,prediction)
+
+
+from sklearn.ensemble import RandomForestClassifier
+
+classifier = RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1)
+
+classifier.fit(x_train, Y)
+prediction = classifier.predict(x_test)
+
+evaluate_classifier(classifier,x_test,Y_test,prediction)
+#seems to work, accuracy 89.79
+
+from sklearn.svm import SVC
+
+classifier = SVC(gamma=2, C=1)
+
+print(x_train.shape, Y.shape)
+classifier.fit(x_train, Y) #ValueError: bad input shape (3726, 11)
+prediction = classifier.predict(x_test)
 
 evaluate_classifier(classifier,x_test,Y_test,prediction)
