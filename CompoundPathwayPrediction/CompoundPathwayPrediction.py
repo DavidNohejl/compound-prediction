@@ -22,14 +22,14 @@ Y_test = mlb.fit_transform(y_test)
 classifier = BinaryRelevance(classifier = DecisionTreeClassifier(random_state=0,max_depth=5))
 classifier = classifier.fit(x_train, Y)
 
-y_pred = classifier.predict(x_test)
+y_pred = classifier.predict(x_test).toarray()
 y_pred_decoded = mlb.inverse_transform(y_pred)
 
-evaluate_classifier(classifier,x_test,Y_test, y_pred,"BinaryRelevance DecisionTreeClassifier(random_state=0,max_depth=5)")
+evaluate_classifier(classifier,x_test,Y_test, y_pred,"BinaryRelevance DecisionTreeClassifier(random_state=0,max_depth=5)",x_train,Y,y_test)
 
 classifier = LabelPowerset(classifier = DecisionTreeClassifier(random_state=0,max_depth=5))
 classifier = classifier.fit(x_train, Y)
-evaluate_classifier(classifier,x_test,Y_test, y_pred,"LabelPowerset DecisionTreeClassifier(random_state=0,max_depth=10)")
+evaluate_classifier(classifier,x_test,Y_test, y_pred,"LabelPowerset DecisionTreeClassifier(random_state=0,max_depth=10)",x_train,y_train,Y)
 
 #plot_confusion_matrix(classifier,x_test,Y_test.argmax(axis=1))
 #plt.show()
@@ -59,9 +59,9 @@ x_test = np.matrix(np.reshape(np.hstack(x_test),(-1,7)))
 
 classifier = MLkNN(k=1,s=0.5)
 
-prediction = classifier.fit(x_train, Y).predict(x_test)
+prediction = classifier.fit(x_train, Y).predict(x_test).toarray()
 
-evaluate_classifier(classifier,x_test,Y_test,prediction,"MLkNN(k=1,s=0.5)")
+evaluate_classifier(classifier,x_test,Y_test,prediction,"MLkNN(k=1,s=0.5)",x_train,y_train,Y)
 
 
 from sklearn.ensemble import RandomForestClassifier
@@ -71,7 +71,7 @@ classifier = RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1
 classifier.fit(x_train, Y)
 prediction = classifier.predict(x_test)
 
-evaluate_classifier(classifier,x_test,Y_test,prediction, "RandomForestClassifier")
+evaluate_classifier(classifier,x_test,Y_test,prediction, "RandomForestClassifier",x_train,y_train,Y)
 #seems to work, accuracy 89.79
 
 from sklearn.svm import SVC
@@ -82,7 +82,7 @@ print(x_train.shape, Y.shape)
 classifier.fit(x_train, Y)
 prediction = classifier.predict(x_test)
 
-evaluate_classifier(classifier,x_test,Y_test,prediction, "BinaryRelevance SVC")
+evaluate_classifier(classifier,x_test,Y_test,prediction, "BinaryRelevance SVC",x_train,y_train,Y)
 
 
 from sklearn.neural_network import MLPClassifier
@@ -92,29 +92,29 @@ from sklearn.neural_network import MLPClassifier
 classifier = MLPClassifier(random_state=1, max_iter=300).fit(x_train, Y)
 prediction = classifier.predict(x_test)
 
-evaluate_classifier(classifier,x_test,Y_test,prediction,"MLPClassifier")
+evaluate_classifier(classifier,x_test,Y_test,prediction,"MLPClassifier",x_train,y_train,Y)
 
 classifier = MLPClassifier(random_state=1, max_iter=300,hidden_layer_sizes=(50,50)).fit(x_train, Y)
 prediction = classifier.predict(x_test)
 
-evaluate_classifier(classifier,x_test,Y_test,prediction,"MLPClassifier 50-50")
+evaluate_classifier(classifier,x_test,Y_test,prediction,"MLPClassifier 50-50",x_train,y_train,Y)
 
 classifier = MLPClassifier(random_state=1, max_iter=300,hidden_layer_sizes=(50,100,50)).fit(x_train, Y)
 prediction = classifier.predict(x_test)
 
-evaluate_classifier(classifier,x_test,Y_test,prediction,"MLPClassifier 50-100-50")
+evaluate_classifier(classifier,x_test,Y_test,prediction,"MLPClassifier 50-100-50",x_train,y_train,Y)
 
 classifier = MLPClassifier(random_state=1, max_iter=300,hidden_layer_sizes=(1000)).fit(x_train, Y)
 prediction = classifier.predict(x_test)
 
-evaluate_classifier(classifier,x_test,Y_test,prediction,"MLPClassifier 1000")
+evaluate_classifier(classifier,x_test,Y_test,prediction,"MLPClassifier 1000",x_train,y_train,Y)
 
 
 from sklearn.ensemble import AdaBoostClassifier
 classifier = BinaryRelevance(classifier=AdaBoostClassifier(n_estimators=100, random_state=0)).fit(x_train, Y)
 prediction = classifier.predict(x_test)
 
-evaluate_classifier(classifier,x_test,Y_test,prediction,"BinaryRelevance AdaBoostClassifier")
+evaluate_classifier(classifier,x_test,Y_test,prediction,"BinaryRelevance AdaBoostClassifier",x_train,y_train,Y)
 
 
 # from http://scikit.ml/modelselection.html#Estimating-hyper-parameter-k-for-embedded-classifiers
